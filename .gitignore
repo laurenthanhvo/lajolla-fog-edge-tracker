@@ -18,3 +18,4 @@ venv/
 *.gz
 *.zip
 data/
+!docs/assets/*.png
