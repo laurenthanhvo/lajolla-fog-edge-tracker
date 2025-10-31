@@ -11,3 +11,10 @@ venv/
 
 # Images / intermediates (optional to ignore)
 *.png
+
+# data
+*.nc
+*.zarr
+*.gz
+*.zip
+data/
