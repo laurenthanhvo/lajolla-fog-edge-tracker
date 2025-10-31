@@ -3,31 +3,82 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fog Edge Chaser — Prototype</title>
+  <title>La Jolla Fog Edge Tracker — Prototype</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
   <header>
-    <h1>Fog Edge Chaser — UCSD / La Jolla</h1>
-    <p>BTD (10.3 µm − 3.9 µm), GOES-18 CONUS. A/B toggle & transect speed (to be implemented).</p>
+    <h1>La Jolla Fog Edge Tracker</h1>
+    <p>Nighttime Brightness-Temperature Difference (BTD = 10.3 µm − 3.9 µm), GOES-18 CONUS.</p>
   </header>
 
   <main>
-    <div class="controls">
-      <button id="btnA">Show A (t₁)</button>
-      <button id="btnB">Show B (t₂)</button>
-      <span id="status">Load two rasters to begin…</span>
-    </div>
+    <!-- ===== Prototype A/B toggle ===== -->
+    <section>
+      <h2>Prototype Viewer</h2>
+      <div class="controls">
+        <button id="btnA">Show t₁ (BTD)</button>
+        <button id="btnB">Show t₂ (BTD)</button>
+        <!-- Optional third image if you saved a diff: assets/BTD_diff_t2_minus_t1.png -->
+        <button id="btnD" aria-label="Show diff (optional)">ΔBTD (t₂−t₁)</button>
+        <span id="status" class="status">Ready</span>
+      </div>
 
-    <div id="viz"></div>
+      <!-- Display area for the current image -->
+      <div id="viz" class="viz">
+        <img id="ab-image" alt="BTD raster" src="assets/BTD_t1.png" style="max-width:100%; display:block;">
+      </div>
+
+      <p class="note">
+        This prototype swaps precomputed PNG rasters. Next step: draw a transect and compute edge motion (km/h).
+      </p>
+    </section>
+
+    <!-- ===== Exploratory figures (for your write-up) ===== -->
+    <section>
+      <h2>Exploratory Figures</h2>
+      <div class="grid">
+        <figure>
+          <img src="assets/BTD_t1.png" alt="BTD at t1">
+          <figcaption>BTD at t₁</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/BTD_t2.png" alt="BTD at t2">
+          <figcaption>BTD at t₂ (~30 min later)</figcaption>
+        </figure>
+
+        <!-- If you generated these, they’ll show automatically -->
+        <figure>
+          <img src="assets/C13_t1.png" alt="C13 at t1">
+          <figcaption>Band C13 (10.3 µm) at t₁</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/C07_t1.png" alt="C07 at t1">
+          <figcaption>Band C07 (3.9 µm) at t₁</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/C13_t2.png" alt="C13 at t2">
+          <figcaption>C13 at t₂</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/C07_t2.png" alt="C07 at t2">
+          <figcaption>C07 at t₂</figcaption>
+        </figure>
+
+        <!-- Optional: BTD difference -->
+        <figure>
+          <img src="assets/BTD_diff_t2_minus_t1.png" alt="BTD difference t2 - t1">
+          <figcaption>ΔBTD = BTD(t₂) − BTD(t₁)</figcaption>
+        </figure>
+      </div>
+    </section>
 
     <section class="notes">
-      <h2>Design Notes</h2>
+      <h2>Notes</h2>
       <ul>
-        <li>Use D3 for zoom/pan, brushing, and line drawing.</li>
-        <li>Compute displacement along the user-drawn transect between A and B.</li>
-        <li>Report km/h with the known time delta between scans (~30 min in your selection).</li>
+        <li>Images are derived from ABI-L2-CMIPC (CONUS) NetCDF, GOES-18 (West).</li>
+        <li>Positive BTD typically highlights low clouds/fog at night.</li>
       </ul>
     </section>
   </main>
