@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fog Edge Chaser — Prototype</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Fog Edge Chaser — UCSD / La Jolla</h1>
+    <p>BTD (10.3 µm − 3.9 µm), GOES-18 CONUS. A/B toggle & transect speed (to be implemented).</p>
+  </header>
+
+  <main>
+    <div class="controls">
+      <button id="btnA">Show A (t₁)</button>
+      <button id="btnB">Show B (t₂)</button>
+      <span id="status">Load two rasters to begin…</span>
+    </div>
+
+    <div id="viz"></div>
+
+    <section class="notes">
+      <h2>Design Notes</h2>
+      <ul>
+        <li>Use D3 for zoom/pan, brushing, and line drawing.</li>
+        <li>Compute displacement along the user-drawn transect between A and B.</li>
+        <li>Report km/h with the known time delta between scans (~30 min in your selection).</li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
